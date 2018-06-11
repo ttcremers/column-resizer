@@ -196,7 +196,7 @@ export default class ColumnResizer {
         }
         const tb = this.tb;
         const id = tb.getAttribute(this.ID) || this.RESIZABLE + counter();
-        if (!tb.matches('table') || tb.extended && !options.partialRefresh) {
+        if (tb.tagName !== 'TABLE' || tb.extended && !options.partialRefresh) {
             return null;
         }
         //append required CSS rules
@@ -217,7 +217,7 @@ export default class ColumnResizer {
         tb.opt = this.extendOptions(options);
         const headers = this.getTableHeaders(tb);
         this.extendTable(headers);
-        if (options.remoteTable && options.remoteTable.matches('table')) {
+        if (options.remoteTable && options.remoteTable.tagName === 'TABLE') {
             const remoteHeaders = this.getTableHeaders(tb.opt.remoteTable);
             if (headers.length === remoteHeaders.length) {
                 this.extendRemoteTable(tb.opt.remoteTable, remoteHeaders, tb);
